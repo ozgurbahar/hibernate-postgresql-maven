@@ -1,8 +1,10 @@
+/**
+ * 
+ */
 package main;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Consumer;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -14,34 +16,39 @@ import model.Employees;
  * @author Ozgur
  *
  */
-public class NamedQuery {
+public class HqlQuery {
 
 	public static void main(String[] args) {
-		EntityManager entityManager = Persistence.createEntityManagerFactory("postgresdb").createEntityManager();
 		Query query;
-		
+		Employees employee;
+		String hql;
+		EntityManager entityManager = Persistence.createEntityManagerFactory("postgresdb").createEntityManager();
+
 		/*
 		 * findby id
 		 */
-		query = entityManager.createNamedQuery("Employees.findById", Employees.class).setParameter("id", 1L);
-		Employees employee = (Employees) query.getSingleResult();
+		hql = "from Employees e where e.id =:id";
+		query = entityManager.createQuery(hql);
+		query.setParameter("id", 1L);
+		employee = (Employees) query.getSingleResult();
 		System.out.println(employee.getFirstName() + " " + employee.getLastName());
 
 		/*
 		 * findby firstname
 		 */
-		query = entityManager.createNamedQuery("Employees.findByName", Employees.class).setParameter("firstName",
-				"Steve");
+		hql = "from Employees e where e.firstName LIKE :firstName";
+		query = entityManager.createQuery(hql);
+		query.setParameter("firstName", "Bill");
 		employee = (Employees) query.getSingleResult();
 		System.out.println(employee.getFirstName() + " " + employee.getLastName());
 
 		/*
 		 * findby ids
 		 */
-		query = entityManager.createNamedQuery("Employees.findByIds", Employees.class).setParameter("idList",
-				Arrays.asList(1L, 2L));
+		hql = "from Employees e where e.id IN :ids";
+		query = entityManager.createQuery(hql);
+		query.setParameter("ids", Arrays.asList(1L, 2L));
 		List<Employees> employeeList = query.getResultList();
 		employeeList.stream().forEach(p -> System.out.println(p.getFirstName() + " " + p.getLastName()));
 	}
-
 }
