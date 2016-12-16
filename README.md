@@ -1,1 +1,1 @@
-PostgreSql & Hibernate Samples
+PostgreSql & Hibernate & Maven tutorial
