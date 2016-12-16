@@ -1,1 +1,1 @@
-Hibernate Samples
+PostgreSql & Hibernate Samples
