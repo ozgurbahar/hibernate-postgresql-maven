@@ -50,5 +50,7 @@ public class HqlQuery {
 		query.setParameter("ids", Arrays.asList(1L, 2L));
 		List<Employees> employeeList = query.getResultList();
 		employeeList.stream().forEach(p -> System.out.println(p.getFirstName() + " " + p.getLastName()));
+		
+		entityManager.close();
 	}
 }
