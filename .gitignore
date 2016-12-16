@@ -1,0 +1,6 @@
+java-hibernate/target/
+*.classpath
+java-hibernate/.project
+*.prefs
+java-hibernate/.settings/org.eclipse.wst.common.project.facet.core.prefs.xml
+java-hibernate/.settings/org.eclipse.wst.common.project.facet.core.xml
